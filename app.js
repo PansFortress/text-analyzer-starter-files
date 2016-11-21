@@ -16,7 +16,7 @@ function getWordCount(someText){
 
 function getUniqueWordCount(someText){
 	var someArray = [];
-	someText = someText.split(" ");
+	someText = someText.trim().split(" ");
 	//console.log(someText.length);
 
 	for(var i = 0; i < someText.length; i++){
@@ -31,7 +31,7 @@ function getUniqueWordCount(someText){
 };
 
 function getAvgWordLength(someText){
-	someText = someText.split(" ");
+	someText = someText.trim().split(" ");
 	var totalWordLength = 0;
 
 	for(var i = 0; i < someText.length; i++){
@@ -41,7 +41,7 @@ function getAvgWordLength(someText){
 	return (totalWordLength/someText.length);
 };
 
-//Something weird is happening here with the math
+//Something weird is happening here with what I assume is newline
 function getAvgSentenceLength(someText){
 	someText = someText.trim().split(".");
 	console.log(someText);
@@ -50,6 +50,6 @@ function getAvgSentenceLength(someText){
 	for(var i = 0; i < someText.length-1; i++){
 		totalWordCount += someText[i].trim().split(" ").length;
 	}
-	
+
 	return (totalWordCount/someText.length-1);
 };
