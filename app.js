@@ -1,4 +1,3 @@
-// your code here!
 $("form").submit(function(event){
 	//grab all the text
 	//run the text through a few analyzers for
@@ -8,7 +7,7 @@ $("form").submit(function(event){
 	//4. Average Sentence Length
 	var userInput = $(this).find('#user-text').val();
 	//console.log(getUniqueWordCount(userInput));
-	console.log(getAvgWordLength(userInput));
+	console.log(getAvgSentenceLength(userInput));
 });
 
 function getWordCount(someText){
@@ -40,4 +39,17 @@ function getAvgWordLength(someText){
 	}
 
 	return (totalWordLength/someText.length);
+};
+
+//Something weird is happening here with the math
+function getAvgSentenceLength(someText){
+	someText = someText.trim().split(".");
+	console.log(someText);
+	var totalWordCount = 0;
+
+	for(var i = 0; i < someText.length-1; i++){
+		totalWordCount += someText[i].trim().split(" ").length;
+	}
+	
+	return (totalWordCount/someText.length-1);
 };
