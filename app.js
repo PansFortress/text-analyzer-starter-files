@@ -5,11 +5,18 @@ $("form").submit(function(event){
 	//2. Unique Word Count
 	//3. Average Word Length
 	//4. Average Sentence Length
-	var userInput = $(this).find('#user-text').val();
+	event.preventDefault();
+	var userInput = $('#user-text').val();
+	$(".text-report").removeClass("hidden");
+	$(".js-wordcount").text(getWordCount(userInput));
+	$(".js-u-wordcount").text(getUniqueWordCount(userInput));
+	$(".js-avg-wordlength").text(getAvgWordLength(userInput));
+	$(".js-avg-sentencelength").text(getAvgSentenceLength(userInput));
 	//console.log(getUniqueWordCount(userInput));
-	console.log(getAvgSentenceLength(userInput));
+	console.log(getAvgWordLength(userInput));
 });
 
+//TODO: ipsum.↵↵Morbi is counted as one word and not two
 function getWordCount(someText){
 	return someText.split(" ").length;
 };
@@ -30,8 +37,10 @@ function getUniqueWordCount(someText){
 	return someArray.length;
 };
 
+//TODO: Cleanup periods
 function getAvgWordLength(someText){
 	someText = someText.trim().split(" ");
+	console.log(someText);
 	var totalWordLength = 0;
 
 	for(var i = 0; i < someText.length; i++){
@@ -41,15 +50,21 @@ function getAvgWordLength(someText){
 	return (totalWordLength/someText.length);
 };
 
-//Something weird is happening here with what I assume is newline
 function getAvgSentenceLength(someText){
 	someText = someText.trim().split(".");
+	someText = someText.filter(function(sentence){
+		if(sentence !== ""){
+			return true;
+		}
+		return false;
+	});
+
 	console.log(someText);
 	var totalWordCount = 0;
 
-	for(var i = 0; i < someText.length-1; i++){
+	for(var i = 0; i < someText.length; i++){
 		totalWordCount += someText[i].trim().split(" ").length;
 	}
 
-	return (totalWordCount/someText.length-1);
+	return (totalWordCount/someText.length);
 };
