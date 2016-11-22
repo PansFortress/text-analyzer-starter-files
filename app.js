@@ -21,6 +21,7 @@ function getWordCount(someText){
 	return someText.split(" ").length;
 };
 
+//TODO: o(N^2) job right now
 function getUniqueWordCount(someText){
 	var someArray = [];
 	someText = someText.trim().split(" ");
@@ -29,7 +30,7 @@ function getUniqueWordCount(someText){
 	for(var i = 0; i < someText.length; i++){
 		var word = someText[i];
 
-	//	console.log(word + " : " + someArray.indexOf(word));
+	//indexOf is a hidden loop
 		if(someArray.indexOf(word) < 0){
 			someArray.push(word);
 		}
